@@ -9,14 +9,19 @@ async def mockSay(something):
 
 actions.bot.say = mockSay
 
+def async_test(test):
+    event_loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(event_loop)
+    coro = asyncio.coroutine(test)
+    event_loop.run_until_complete(coro())
+    event_loop.close()
+
+
+
 class TestActionVote(unittest.TestCase):
 
     def test_Vote(self):
         """Should send the poll message when called with enough arguments"""
-
-        event_loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(event_loop)
-
         async def run_test():
             options = [("dude","what","something","two"),
                     ("potatoes","funny","chirstmas eve", "woah!"),
@@ -27,7 +32,4 @@ class TestActionVote(unittest.TestCase):
                     f":one: {opt[1]}\n"
                     f":two: {opt[2]}\n"
                     f":three: {opt[3]}"))
-
-        coro = asyncio.coroutine(run_test)
-        event_loop.run_until_complete(coro())
-        event_loop.close()
+        async_test(run_test)
