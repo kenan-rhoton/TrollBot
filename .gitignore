@@ -1,0 +1,4 @@
+*.sw[a-p]
+src/config.yml
+.cache
+__pycache__
