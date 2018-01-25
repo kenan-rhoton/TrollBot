@@ -11,8 +11,8 @@ actions.bot.say = mockSay
 
 class TestActionVote(unittest.TestCase):
 
-    def test_StartVote(self):
-        """Should send the poll message when started"""
+    def test_Vote(self):
+        """Should send the poll message when called with enough arguments"""
 
         event_loop = asyncio.new_event_loop()
         asyncio.set_event_loop(event_loop)
@@ -22,7 +22,7 @@ class TestActionVote(unittest.TestCase):
                     ("potatoes","funny","chirstmas eve", "woah!"),
                     ("yes indeed", "not really", "ASD FQWE FAW DSF", "©")]
             for opt in options:
-                await actions.vote.callback("start", *opt)
+                await actions.vote.callback(*opt)
                 self.assertEqual(message, (f"{opt[0]}\n"
                     f":one: {opt[1]}\n"
                     f":two: {opt[2]}\n"
