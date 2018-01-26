@@ -16,24 +16,29 @@ def get_quoted(view):
 
 @bot.command(pass_context=True)
 async def vote(ctx):
+    # Reaction representations MUST be Unicode or die
     number = ['🥔','🥓','👽','🙃','☀','🙈','🌵']
     args = get_quoted(ctx.view)
 
-    msg = votes.vote(*args)
-
+    msg, err = votes.vote(*args)
     response = await bot.say(msg)
 
-    poke.add_poke(response)
+    # DO NOT PARSE THE RESPONSE IF WE HAD AN ERROR!
+    if err is not None:
+        return
+
+    poke.add_pokes(response)
 
     for i in range(0,len(args)-1):
         await bot.add_reaction(response,number[i])
 
 @bot.event
 async def on_reaction_add(reaction,user):
-    for i, poke in enumerate(poke.pokes):
+    # Bad idea to modify a list you're iterating, so we iterate a copy
+    for poke in poke.pokes.copy():
         if user.id == poke['user_id']:
             if reaction.message.id == poke['message_id']:
-                pokes.remove_poke(i)
+                pokes.remove_poke(poke)
                 break
 
 @bot.event

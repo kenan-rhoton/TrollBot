@@ -10,7 +10,8 @@ class TestVote(unittest.TestCase):
                 ("potatoes","funny","chirstmas eve", "woah!"),
                 ("yes indeed", "not really", "ASD FQWE FAW DSF", "©")]
         for opt in options:
-            message = votes.vote(*opt)
+            message, error = votes.vote(*opt)
+            self.assertIsNone(error)
             self.assertEqual(message, (f"{opt[0]}\n"
                 f":potato: {opt[1]}\n"
                 f":bacon: {opt[2]}\n"
@@ -20,4 +21,6 @@ class TestVote(unittest.TestCase):
         """Should return a usage message without enough args"""
 
         msg = "Usage: ?vote \"Vote title\" \"Option 1\" \"Option 2\" \"...\""
-        self.assertEqual(msg, votes.vote("one"))
+        message, error = votes.vote("one")
+        self.assertEqual(error,"NotEnoughArgs")
+        self.assertEqual(msg, message)
