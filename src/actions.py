@@ -4,6 +4,7 @@ from discord.ext.commands.view import quoted_word
 
 import votes
 import poke
+from roller import Roller
 
 bot = commands.Bot(command_prefix='?', description="")
 
@@ -14,7 +15,7 @@ def get_quoted(view):
         res.append(quoted_word(view))
     return res
 
-@bot.command(pass_context=True)
+@bot.command(pass_context=True,description="Organize a vote")
 async def vote(ctx):
     # Reaction representations MUST be Unicode or die
     number = ['🥔','🥓','👽','🙃','☀','🙈','🌵']
@@ -31,6 +32,21 @@ async def vote(ctx):
 
     for i in range(0,len(args)-1):
         await bot.add_reaction(response,number[i])
+
+@bot.command(description="Roll a table from r/BehindTheTables")
+async def roll(*table_name : str):
+    roll = Roller(" ".join(table_name))
+
+    if roll.table_link is None:
+        await bot.say("Can't find that in https://www.reddit.com/r/BehindTheTables/wiki/index")
+        return
+
+    roll.load_table()
+    result = roll.roll_it()
+    msg = ""
+    for res in result:
+        msg += f"{res['title']} {res['choice']} "
+    await bot.say(msg)
 
 @bot.event
 async def on_reaction_add(reaction,user):

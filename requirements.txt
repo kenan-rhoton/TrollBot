@@ -1,7 +1,8 @@
 aiohttp==1.0.5
 async-timeout==2.0.0
+beautifulsoup4==4.6.0
 chardet==3.0.4
 discord.py==0.16.12
 multidict==4.0.0
+PyYaml==3.12
 websockets==3.4
-pyyaml==3.12
