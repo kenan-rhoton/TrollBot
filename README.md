@@ -7,3 +7,5 @@ You will have to copy `src/config.yml.sample` to `src/config.yml` and put your a
 Once you have them, run `docker-compose build` and `docker-compose up` within this folder.
 
 ENJOY
+
+To modify this, you probably want to read [The Discord.py API](http://discordpy.readthedocs.io/en/latest/api.html)
