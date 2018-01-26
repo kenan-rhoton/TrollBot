@@ -17,9 +17,9 @@ async def vote(ctx):
             '🥓',
             '👽',
             '🙃',
-            '\N{Digit Five}',
-            '\N{Digit Six}',
-            '\N{Digit Seven}',
+            '☀'
+            '🙈',
+            '🌵',
             ]
     view = ctx.view
     args = []

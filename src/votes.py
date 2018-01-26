@@ -11,9 +11,9 @@ def vote(*choices : str):
                 "bacon",
                 "alien",
                 "upside_down",
-                "five",
-                "six",
-                "seven"
+                "sunny",
+                "see_no_evil",
+                "cactus"
                 ]
         
         for i, choice in enumerate(choices[1:]):
