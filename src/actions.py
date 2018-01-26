@@ -1,8 +1,6 @@
 import discord
 from discord.ext import commands
 from discord.ext.commands.view import quoted_word
-import logging
-import inspect
 
 import votes
 
@@ -48,7 +46,6 @@ async def vote(ctx):
                             'channel_name': response.channel,
                             'message_id': response.id
                             })
-                        logging.info(pokes)
 
     for i in range(0,len(args)-1):
         await bot.add_reaction(response,number[i])
