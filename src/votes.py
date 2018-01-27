@@ -1,9 +1,10 @@
 def vote(*choices : str):
     msg = ""
+    error = None
 
     if len(choices) < 3:
         msg = f"Usage: ?vote \"Vote title\" \"Option 1\" \"Option 2\" \"...\""
-
+        error = "NotEnoughArgs"
     else:
         msg = f"{choices[0]}"
         number = [
@@ -19,4 +20,4 @@ def vote(*choices : str):
         for i, choice in enumerate(choices[1:]):
             msg += f"\n:{number[i]}: {choice}"
     
-    return msg
+    return msg, error

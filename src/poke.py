@@ -1,6 +1,6 @@
 pokes = []
 
-def add_poke(message):
+def add_pokes(message):
     for mention in message.mentions:
         pokes.append({
             'user_id': mention.id,
@@ -19,5 +19,5 @@ def add_poke(message):
                             'message_id': message.id
                             })
 
-def remove_poke(i):
-    del pokes[i]
+def remove_poke(poke):
+    pokes.remove(poke)
