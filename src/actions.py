@@ -45,7 +45,7 @@ async def roll(*table_name : str):
     result = roll.roll_it()
     msg = ""
     for res in result:
-        msg += f"{res['title']} {res['choice']} "
+        msg += f"{res['title']} {res['choice']}\n"
     await bot.say(msg)
 
 @bot.event
