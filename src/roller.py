@@ -6,12 +6,15 @@ import random
 # Very simple performance improvement:
 # Load the index just once on startup and reuse
 IndexPage = urllib.request.urlopen("https://www.reddit.com/r/BehindTheTables/wiki/index")
+IndexSoup = BeautifulSoup(IndexPage, "html.parser")
 
 class Roller:
     def __init__(self, table, html=None):
+        soup = None
         if html is None:
-            html = IndexPage
-        soup = BeautifulSoup(html, "html.parser")
+            soup = IndexSoup
+        else:
+            soup = BeautifulSoup(html, "html.parser")
         self.table_link = None
         for link in soup.find_all('a'):
             if link.get_text().lower() == table.lower():
