@@ -18,7 +18,7 @@ def get_quoted(view):
 @bot.command(pass_context=True,description="Organize a vote")
 async def vote(ctx):
     # Reaction representations MUST be Unicode or die
-    number = ['🥔','🥓','👽','🙃','☀','🙈','🌵']
+    number = ['🇦', '🇧', '🇨', '🇩', '🇪', '🇫', '🇬']
     args = get_quoted(ctx.view)
 
     msg, err = votes.vote(*args)

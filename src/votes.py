@@ -8,13 +8,13 @@ def vote(*choices : str):
     else:
         msg = f"{choices[0]}"
         number = [
-                "potato",
-                "bacon",
-                "alien",
-                "upside_down",
-                "sunny",
-                "see_no_evil",
-                "cactus"
+                "regional_indicator_a",
+                "regional_indicator_b",
+                "regional_indicator_c",
+                "regional_indicator_d",
+                "regional_indicator_e",
+                "regional_indicator_f",
+                "regional_indicator_g"
                 ]
         
         for i, choice in enumerate(choices[1:]):
