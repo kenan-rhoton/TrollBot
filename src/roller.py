@@ -35,7 +35,7 @@ class Roller:
                 t.set_die(split[0])
 
                 if maybe_table.find_next().name == 'br':
-                    for item in re.findall(r'[0-9-]+[^\n]+', maybe_table.findParent().get_text())[1:]:
+                    for item in re.findall(r'[0-9.-]+ ([^\n]+)', maybe_table.findParent().get_text())[1:]:
                         t.add_item(item)
                 else:
                     #Get the list from the next element (an ol)

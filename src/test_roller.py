@@ -90,4 +90,4 @@ class TestRoller(unittest.TestCase):
 
         self.assertEqual(len(roll.table),1)
         self.assertEqual(roll.table[0].title,"You are...")
-        self.assertEqual(roll.table[0].items,["1. Strong","2. Potato","3. Weak","4. Funny"])
+        self.assertEqual(roll.table[0].items,["Strong","Potato","Weak","Funny"])
