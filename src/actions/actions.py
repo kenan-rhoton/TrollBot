@@ -2,9 +2,9 @@ import discord
 from discord.ext import commands
 from discord.ext.commands.view import quoted_word
 
-import votes
-import poke
-from roller import Roller
+from votes import votes
+from poke import poke
+from roller.roller import Roller
 
 bot = commands.Bot(command_prefix='?', description="")
 
@@ -51,10 +51,10 @@ async def roll(*table_name : str):
 @bot.event
 async def on_reaction_add(reaction,user):
     # Bad idea to modify a list you're iterating, so we iterate a copy
-    for poke in poke.pokes.copy():
-        if user.id == poke['user_id']:
-            if reaction.message.id == poke['message_id']:
-                pokes.remove_poke(poke)
+    for p in poke.pokes.copy():
+        if user.id == p['user_id']:
+            if reaction.message.id == p['message_id']:
+                pokes.remove_poke(p)
                 break
 
 @bot.event

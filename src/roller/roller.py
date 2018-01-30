@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import urllib.request
-from table import Table
+from roller.table.table import Table
 import random
 import re
 
