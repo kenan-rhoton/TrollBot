@@ -4,10 +4,23 @@ from roller.table.table import Table
 import random
 import re
 
+
+URLCache = {}
+
+# Avoiding Reddit rate-limiting with non-descriptive User-Agent
+# Also caching for speed while I'm at it
+def fetch_url(url):
+    if url not in URLCache:
+        req = urllib.request.Request(url, headers={'User-Agent' : 'TrollPlayingBot for Discord rolling on r/BehindTheTables by /u/Lortian'})
+        res = urllib.request.urlopen(req)
+        URLCache[url] = res.read()
+    return URLCache[url]
+
 # Very simple performance improvement:
 # Load the index just once on startup and reuse
-IndexPage = urllib.request.urlopen("https://www.reddit.com/r/BehindTheTables/wiki/index")
+IndexPage = fetch_url("https://www.reddit.com/r/BehindTheTables/wiki/index")
 IndexSoup = BeautifulSoup(IndexPage, "html.parser")
+
 
 class Roller:
     def __init__(self, table, html=None):
@@ -23,7 +36,7 @@ class Roller:
 
     def load_table(self, html = None):
         if html is None:
-            html = urllib.request.urlopen(self.table_link.get('href'))
+            html = fetch_url(self.table_link.get('href'))
 
         self.table_soup = BeautifulSoup(html, "html.parser")
         self.table = []
