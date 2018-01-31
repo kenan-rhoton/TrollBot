@@ -5,7 +5,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 #Import the actions module
-import actions
+from actions import actions
 
 #Import the config module
 import config

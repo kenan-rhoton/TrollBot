@@ -1,7 +1,8 @@
 from bs4 import BeautifulSoup
 import urllib.request
-from table import Table
+from roller.table.table import Table
 import random
+import re
 
 # Very simple performance improvement:
 # Load the index just once on startup and reuse
@@ -33,9 +34,13 @@ class Roller:
                 t = Table(" ".join(split[1:]))
                 t.set_die(split[0])
 
-                #Get the lis from the next element (an ol)
-                for item in maybe_table.find_next().findChildren():
-                    t.add_item(item.get_text())
+                if maybe_table.find_next().name == 'br':
+                    for item in re.findall(r'[0-9.-]+ ([^\n]+)', maybe_table.findParent().get_text())[1:]:
+                        t.add_item(item)
+                else:
+                    #Get the list from the next element (an ol)
+                    for item in maybe_table.find_next().findChildren():
+                        t.add_item(item.get_text())
                 self.table.append(t)
 
     def get_table_link(self):

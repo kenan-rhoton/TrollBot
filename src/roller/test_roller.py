@@ -1,5 +1,5 @@
 import unittest
-from roller import Roller
+from roller.roller import Roller
 
 class TestRoller(unittest.TestCase):
 
@@ -14,8 +14,8 @@ class TestRoller(unittest.TestCase):
     def test_RollerLoadsTable(self):
         """Should generate the tables from the HTML"""
 
-        fakeHTML = '<html><body><a href="Not NICE!">WRONG!</a><a href="nice!">Correct, yay!</a></body></html>'
-        roll = Roller("Correct, yay!",fakeHTML)
+        fakeHTML = ''
+        roll = Roller("",fakeHTML)
         fakeTable = '<html><body><p><strong>d4 You are...</strong></p><ol><li> Strong</li><li> Potato</li><li> Weak</li><li> Funny</li></ol></body></html>'
 
         roll.load_table(fakeTable)
@@ -27,8 +27,8 @@ class TestRoller(unittest.TestCase):
     def test_RollerRollsSensibly(self):
         """Should generate the rolls from the tables"""
 
-        fakeHTML = '<html><body><a href="Not NICE!">WRONG!</a><a href="nice!">Correct, yay!</a></body></html>'
-        roll = Roller("Correct, yay!",fakeHTML)
+        fakeHTML = ''
+        roll = Roller("",fakeHTML)
         fakeTable = '<html><body><p><strong>d4 You are...</strong></p><ol><li> Strong</li><li> Potato</li><li> Weak</li><li> Funny</li></ol></body></html>'
 
         roll.load_table(fakeTable)
@@ -69,3 +69,25 @@ class TestRoller(unittest.TestCase):
         self.assertTrue(results[0]['choice'] in ["Strong","Potato","Weak","Funny"])
         self.assertEqual(results[1]['title'], "... and you were born ...")
         self.assertTrue(results[1]['choice'] in bornOptions)
+
+    def test_RollerLoadsTableWithAlternateFormat(self):
+        """Should generate the tables from the HTML with the alternate format"""
+
+        fakeHTML = ''
+        roll = Roller("",fakeHTML)
+        fakeTable = """<html><body><p><strong>d4 You are...</strong>
+        <br>
+        1. Strong
+        <br>
+        2. Potato
+        <br>
+        3. Weak
+        <br>
+        4. Funny
+        </p></body></html>"""
+
+        roll.load_table(fakeTable)
+
+        self.assertEqual(len(roll.table),1)
+        self.assertEqual(roll.table[0].title,"You are...")
+        self.assertEqual(roll.table[0].items,["Strong","Potato","Weak","Funny"])

@@ -1,5 +1,5 @@
 import unittest
-from table import Table
+from roller.table.table import Table
 
 class TestTable(unittest.TestCase):
 
