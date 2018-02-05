@@ -5,6 +5,7 @@ from discord.ext.commands.view import quoted_word
 from votes import votes
 from poke import poke
 from roller.roller import Roller
+from pccreator import pccreator
 
 bot = commands.Bot(command_prefix='?', description="")
 
@@ -65,3 +66,28 @@ async def on_member_update(before,after):
                 await bot.send_message(
                         after,
                         f"You have a vote going on in #{poke['channel_name']}, get on it!")
+
+@bot.event
+async def pc(args):
+	pcidx = -1
+	for i in range(pcs):
+		if pcs[i].name == args[0]:
+			pcidx = i
+			break
+	if pcidx == -1:
+		#CREAR NOU PC
+
+	del args[0]
+	action = args[0]
+	del args[0]
+	if action == "attributes":
+		pcs[pcidx].defattributes(args)
+	elif action == "race":
+		pcs[pcidx].defrace(args)
+	elif action == "class":
+		pcs[pcidx].defclass(args)
+
+
+
+
+	 
