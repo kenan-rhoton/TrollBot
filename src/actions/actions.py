@@ -69,9 +69,25 @@ async def on_member_update(before,after):
 
 @bot.event
 async def pc(args):
-	usingPC = 0
-	for pctmp in pcs:
-		if pctmp.name == args[0]:
-			usingPC = pctmp
+	pcidx = -1
+	for i in range(pcs):
+		if pcs[i].name == args[0]:
+			pcidx = i
 			break
-	if usingPC == 0: 
+	if pcidx == -1:
+		#CREAR NOU PC
+
+	del args[0]
+	action = args[0]
+	del args[0]
+	if action == "attributes":
+		pcs[pcidx].defattributes(args)
+	elif action == "race":
+		pcs[pcidx].defrace(args)
+	elif action == "class":
+		pcs[pcidx].defclass(args)
+
+
+
+
+	 
