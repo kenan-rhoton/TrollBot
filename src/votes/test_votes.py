@@ -1,5 +1,5 @@
 import unittest
-from votes import votes
+from . import votes
 
 class TestVote(unittest.TestCase):
 

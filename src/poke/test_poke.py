@@ -1,4 +1,4 @@
-from poke import poke
+from . import poke
 import unittest
 
 class MockMention:
