@@ -4,5 +4,6 @@ beautifulsoup4==4.6.0
 chardet==3.0.4
 discord.py==0.16.12
 multidict==4.0.0
+parsedatetime==2.4
 PyYaml==3.12
 websockets==3.4
