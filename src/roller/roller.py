@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import urllib.request
-from roller.table.table import Table
+from .table.table import Table
 import random
 import re
 
@@ -20,7 +20,6 @@ def fetch_url(url):
 # Load the index just once on startup and reuse
 IndexPage = fetch_url("https://www.reddit.com/r/BehindTheTables/wiki/index")
 IndexSoup = BeautifulSoup(IndexPage, "html.parser")
-
 
 class Roller:
     def __init__(self, table, html=None):
