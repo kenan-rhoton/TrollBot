@@ -5,6 +5,9 @@ from discord.ext.commands.view import quoted_word
 from votes import votes
 from poke import poke
 from roller.roller import Roller
+from scheduler.scheduler import Scheduler
+
+sched = Scheduler()
 
 bot = commands.Bot(command_prefix='?', description="")
 
@@ -46,6 +49,11 @@ async def roll(*table_name : str):
     msg = ""
     for res in result:
         msg += f"{res['title']} {res['choice']}\n"
+    await bot.say(msg)
+
+@bot.command(description="Schedule stuff")
+async def schedule(*args : str):
+    msg = sched.process(args)
     await bot.say(msg)
 
 @bot.event
